@@ -23,7 +23,7 @@ func Test_Something(t *testing.T) {
 }
 ```
 A screen grab from the generated HTML file
-![test_catalog.png](..%2F..%2F..%2FDesktop%2Ftest_catalog.png)
+![test_catalog.png](templates%2Ftest_catalog.png)
 
 Corresponding json data
 ```
