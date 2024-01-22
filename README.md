@@ -3,7 +3,10 @@ Creates test catalog from a given directory
 
 This code helps create test catalog for go tests from the test docs/comments
 
-While writing go tests, write the docs or comments in the below format and run the code (refer How to run section). This will generate an HTML file where you will be able to view the catalog for all the go tests. It also generates a json file with details about the tests. You can use this json file to build your own dashboards  
+While writing go tests, write the docs or comments in the below format and run the code (refer How to run section). 
+ - This will generate an HTML file where you will be able to view the catalog for all the go tests. 
+ - It also generates a json file with details about the tests. You can use this json file to build your own dashboards 
+ - It also hosts the test catalog on your localhost on port 8080. Access at http://localhost:8080
 
 ```
 /*
@@ -22,7 +25,7 @@ func Test_Something(t *testing.T) {
     ....
 }
 ```
-A screen grab from the generated HTML file
+A screen grab from the generated HTML file / hosted service
 ![test_catalog.png](templates%2Ftest_catalog.png)
 
 Corresponding json data

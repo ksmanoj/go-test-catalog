@@ -8,12 +8,7 @@ import (
 )
 
 func ConvertToHTML(data []TestCatalog, fileName string) {
-	var templates = []string{"templates/test_catalog_template.html"}
-	tmpl, err := template.ParseFiles(templates...)
-	if err != nil {
-		panic(err)
-	}
-
+	tmpl := getHTMLTemplate()
 	f, err := os.Create(fileName)
 	if err != nil {
 		panic(err)
@@ -24,6 +19,15 @@ func ConvertToHTML(data []TestCatalog, fileName string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func getHTMLTemplate() *template.Template {
+	var templates = []string{"templates/test_catalog_template.html"}
+	tmpl, err := template.ParseFiles(templates...)
+	if err != nil {
+		panic(err)
+	}
+	return tmpl
 }
 
 func WriteToJson(testData []TestCatalog, fileName string) {

@@ -5,6 +5,7 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -120,6 +121,16 @@ func convertToMetadata(input string) CatalogMetaData {
 	}
 
 	return md
+}
+
+func HostCatalog(testCatalog []TestCatalog) {
+	tmpl := getHTMLTemplate()
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		tmpl.Execute(w, testCatalog)
+	})
+	fmt.Println("Access catalog at localhost:8080")
+	http.ListenAndServe(":8080", nil)
 }
 
 type TestCatalog struct {
