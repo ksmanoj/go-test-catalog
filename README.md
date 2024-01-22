@@ -22,6 +22,30 @@ func Test_Something(t *testing.T) {
     ....
 }
 ```
+A screen grab from the generated HTML file
+![test_catalog.png](..%2F..%2F..%2FDesktop%2Ftest_catalog.png)
+
+Corresponding json data
+```
+[
+   {
+      "metadata": {
+         "dir": "catalog",
+         "package": "catalog",
+         "file": "catalog_test.go"
+      },
+      "testName": "Test_Catalog",
+      "description": "\nThis is a sample description of what the test does\n\n",
+      "scenario": "\nGiven I have some conditions\nWhen I do task A\nThen I expect task to be completed successfully\nWhen I disable task A\nAnd I enable task B\nThen I expect task A to be disabled and task B to be executed successfully\n\n",
+      "types": [
+         "e2e"
+      ],
+      "components": [
+         "tasks"
+      ]
+   }
+]
+```
 
 # How to run
 ```go run main.go```
