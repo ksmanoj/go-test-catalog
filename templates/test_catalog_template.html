@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function filterTable() {
+            var testMetadataFilter = document.getElementById('testMetadataFilter').value.toUpperCase();
+            var testNameFilter = document.getElementById('testNameFilter').value.toUpperCase();
+            var descriptionFilter = document.getElementById('descriptionFilter').value.toUpperCase();
+            var scenarioFilter = document.getElementById('scenarioFilter').value.toUpperCase();
+            var testTypeFilter = document.getElementById('testTypeFilter').value.toUpperCase();
+            var componentFilter = document.getElementById('componentFilter').value.toUpperCase();
+
+            var table = document.getElementById('testTable');
+            var tr = table.getElementsByTagName('tr');
+
+            for (var i = 0; i < tr.length; i++) {
+                var tds = tr[i].getElementsByTagName('td');
+                if (tds.length > 0) {
+                    var testName = tds[0].innerText.toUpperCase();
+                    var description = tds[1].innerText.toUpperCase();
+                    var scenario = tds[2].innerText.toUpperCase();
+                    var testType = tds[3].innerText.toUpperCase();
+                    var component = tds[4].innerText.toUpperCase();
+                    var testMetadata = tds[5].innerText.toUpperCase();
+
+                    if (testMetadata.includes(testMetadataFilter) && testName.includes(testNameFilter) &&
+                        description.includes(descriptionFilter) && scenario.includes(scenarioFilter) &&
+                        testType.includes(testTypeFilter) && component.includes(componentFilter)) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<table id="testTable">
+    <tr>
+        <th>Test Name <br/>
+            <label for="testNameFilter"><i>Filter:</i></label>
+            <input type="text" id="testNameFilter" onkeyup="filterTable()" placeholder="Enter Test Name">
+        </th>
+        <th>Description <br/>
+            <label for="descriptionFilter"><i>Filter:</i></label>
+            <input type="text" id="descriptionFilter" onkeyup="filterTable()" placeholder="Enter Description">
+        </th>
+        <th>Scenario <br/>
+            <label for="scenarioFilter"><i>Filter:</i></label>
+            <input type="text" id="scenarioFilter" onkeyup="filterTable()" placeholder="Enter Scenario">
+        </th>
+        <th>Test Type <br/>
+            <label for="testTypeFilter"><i>Filter:</i></label>
+            <input type="text" id="testTypeFilter" onkeyup="filterTable()" placeholder="Enter Test Type">
+        </th>
+        <th>Component <br/>
+            <label for="componentFilter"><i>Filter:</i></label>
+            <input type="text" id="componentFilter" onkeyup="filterTable()" placeholder="Enter Component">
+        </th>
+        <th>Test Meta <br/>
+            <label for="testMetadataFilter"><i>Filter:</i></label>
+            <input type="text" id="testMetadataFilter" onkeyup="filterTable()" placeholder="Enter Test Metadata">
+        </th>
+    </tr>
+    {{range .}}
+    <tr>
+        <td>{{.TestName}}</td>
+        <td >{{.Description}}</td>
+        <td><pre>{{.Scenario}}</pre></td>
+        <td><pre>{{range .Types}}{{.}}<br/>{{end}}</pre></td>
+        <td><pre>{{range .Components}}{{.}}<br/>{{end}}</pre></td>
+        <td>File: {{.TestMetaData.File}}<br/>Package: {{.TestMetaData.Package}}<br/>Dir: {{.TestMetaData.Dir}}<br/></td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>
